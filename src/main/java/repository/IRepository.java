@@ -1,7 +1,7 @@
 package repository;
 
-public interface IRepository<T> {
-     void add(T item);
-     T getId(int id);
+public interface IRepository<Contract> {
+     void add(Contract item);
+     Contract getId(int id);
      void remove(int id);
 }

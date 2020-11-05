@@ -13,7 +13,7 @@ public class Person {
     private int passportSeries;
     private int passportNumber;
 
-    private enum Gender {
+    public enum Gender {
         MALE,
         WOMAN
     }
@@ -64,6 +64,6 @@ public class Person {
     }
 
     public int getAge(){
-       return Period.between(LocalDate.now(), getBirthday()).getYears();
+       return Period.between(getBirthday(), LocalDate.now()).getYears();
     }
 }
