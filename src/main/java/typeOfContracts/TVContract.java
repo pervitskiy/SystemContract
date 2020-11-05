@@ -5,6 +5,10 @@ import customers.Person;
 import java.time.LocalDate;
 
 public class TVContract extends Contract {
+
+    /**
+     * String array of channel names
+     */
     private String[] channelPacage;
 
     public TVContract(int id, int numberContract, LocalDate startDate, LocalDate endDate, Person owner, String[] channelPacage) {

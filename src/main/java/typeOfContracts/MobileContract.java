@@ -7,6 +7,9 @@ import java.time.LocalDate;
 
 public class MobileContract extends Contract {
 
+    /**
+     * Mobile tariff
+     */
     private Rate rate;
 
     public MobileContract(int id, int numberContract, LocalDate startDate, LocalDate endDate, Person owner, Rate rate) {

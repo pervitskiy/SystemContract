@@ -5,10 +5,25 @@ import customers.Person;
 import java.time.LocalDate;
 
 public abstract class Contract {
+    /**
+     * id - id Contract
+     */
     private int id;
     private int numberContract;
+
+    /**
+     * Contract start date
+     */
     private LocalDate startDate;
+
+    /**
+     * Contract end date
+     */
     private LocalDate endDate;
+
+    /**
+     * Owner Contract
+     */
     private Person owner;
 
     public Contract(int id, int numberContract, LocalDate startDate, LocalDate endDate, Person owner) {

@@ -2,33 +2,64 @@ package repository;
 
 import typeOfContracts.Contract;
 
+/**
+ * Class MyRepository, that can add or delete Contract, get a contract by ID
+ * @author Pervitskiy_d_e
+ */
 public class MyRepository implements IRepository<Contract>{
+
+    /**
+     * variable for initializing the array
+     */
     private final int INIT_SIZE = 20;
+
+    /**
+     *
+     */
     private final int CUT_RATE = 5;
+
     private Contract[] array;
     private int count_element;
 
+    /**
+     * Constructor - creating a new object
+     */
     public MyRepository(){
         array = new Contract[INIT_SIZE];
         count_element = 0;
     }
 
+
+    /**
+     * Method for adding a new contract.
+     * @param item - contract,
+     */
     @Override
     public void add(Contract item) {
         if(count_element == array.length-1)
-            resize(array.length*2);
+            resize(array.length*2); // create a new array
         array[count_element++] = item;
     }
 
+    /**
+     * Method to get contract by ID
+     * @param id - id Contract
+     * @return Contact
+     */
     @Override
     public Contract getId(int id) {
-        for(int i=0; i<count_element; i++){
-            if (array[i].getId() == id)
-                return array[i];
+        for (Contract contract: array){
+            if (contract.getId() == id)
+                return contract;
         }
         return null;
     }
 
+
+    /**
+     * Method deleting contract by id
+     * @param id - id Contract
+     */
     @Override
     public void remove(int id) {
         for (int i=0; i<count_element; i++)
@@ -37,13 +68,16 @@ public class MyRepository implements IRepository<Contract>{
                     array[i] = array[i + 1];
                 break;
             }
-
         array[count_element] = null;
         count_element--;
         if (array.length > INIT_SIZE && count_element < array.length / CUT_RATE)
             resize(array.length/2);
     }
 
+    /**
+     * Method expanding repository
+     * @param newLength - new length of the repository
+     */
     private void resize(int newLength) {
         Contract[] newArray = new Contract[newLength];
         System.arraycopy(array, 0, newArray, 0, count_element);
