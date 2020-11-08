@@ -23,7 +23,7 @@ public class QuickSort<T> implements ISorter<T> {
         }
     }
 
-    int partition(T arr[],Comparator<T> comparator, int low, int high)
+    private int partition(T arr[],Comparator<T> comparator, int low, int high)
     {
         T pivot = arr[high];
         int i = (low-1); // index of smaller element
