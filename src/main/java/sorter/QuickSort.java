@@ -4,6 +4,14 @@ import java.util.Comparator;
 
 public class QuickSort<T> implements ISorter<T> {
 
+    /**
+     * Sort Ascending method QuickSort
+     *
+     * @param array - the array to sort
+     * @param comparator - comparison criterion
+     * @param start - start index of the array
+     * @param end - end index of the array
+     */
     @Override
     public void sort(T[] array, Comparator<T> comparator, int start, int end) {
         if (start < end) {
