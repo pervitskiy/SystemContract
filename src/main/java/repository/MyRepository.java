@@ -1,5 +1,6 @@
 package repository;
 
+import customers.Person;
 import sorter.BubbleSort;
 import sorter.ISorter;
 import sorter.QuickSort;
@@ -127,4 +128,19 @@ public class MyRepository implements IRepository<Contract>{
         return array_contract[i];
     }
 
+    public List<Person> getListPerson(){
+        List<Person> list = new ArrayList<>();
+
+        for (int i=0; i<size(); i++){
+            list.add(array_contract[i].getOwner());
+        }
+        return list;
+    }
+
+    @Override
+    public String toString() {
+        return "MyRepository{" +
+                "count_element=" + count_element +
+                '}';
+    }
 }

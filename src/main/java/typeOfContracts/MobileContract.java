@@ -20,4 +20,16 @@ public class MobileContract extends Contract {
     public Rate getRate() {
         return rate;
     }
+
+    @Override
+    public String toString() {
+        return "MobileContract{" +
+                "id=" + super.getId() +
+                ", numberContract=" + super.getNumberContract()+
+                ", startDate=" + super.getStartDate() +
+                ", endDate=" + super.getEndDate() +
+                ", owner=" + super.getOwner() +
+                ", rate=" + rate +
+                '}';
+    }
 }

@@ -2,16 +2,52 @@ package customers;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.Objects;
 
 public class Person {
     private int id;
     private String first_name;
     private String last_name;
+
     private String middle_name;
     private LocalDate birthday;
     private Gender gender;
     private int passportSeries;
     private int passportNumber;
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "id=" + id +
+                ", first_name='" + first_name + '\'' +
+                ", last_name='" + last_name + '\'' +
+                ", middle_name='" + middle_name + '\'' +
+                ", birthday=" + birthday +
+                ", gender=" + gender +
+                ", passportSeries=" + passportSeries +
+                ", passportNumber=" + passportNumber +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return id == person.id &&
+                passportSeries == person.passportSeries &&
+                passportNumber == person.passportNumber &&
+                first_name.equals(person.first_name) &&
+                last_name.equals(person.last_name) &&
+                middle_name.equals(person.middle_name) &&
+                birthday.equals(person.birthday) &&
+                gender == person.gender;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, first_name, last_name, middle_name, birthday, gender, passportSeries, passportNumber);
+    }
 
     public enum Gender {
         MALE,

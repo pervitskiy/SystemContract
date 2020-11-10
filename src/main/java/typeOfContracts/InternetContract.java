@@ -18,4 +18,15 @@ public class InternetContract extends Contract {
     public double getInternetSpeed() {
         return internetSpeed;
     }
+    @Override
+    public String toString() {
+        return "InternetContract{" +
+                "id=" + super.getId() +
+                ", numberContract=" + super.getNumberContract()+
+                ", startDate=" + super.getStartDate() +
+                ", endDate=" + super.getEndDate() +
+                ", owner=" + super.getOwner() +
+                ", internetSpeed=" + internetSpeed +
+                '}';
+    }
 }

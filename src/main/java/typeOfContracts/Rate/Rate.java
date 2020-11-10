@@ -3,12 +3,21 @@ package typeOfContracts.Rate;
 public class Rate{
     private int numberOfMinutes;
     private int numberOfSms;
-    private int nubmerOfGb;
+    private int numberOfGb;
 
     public Rate(int numberOfMinutes, int numberOfSms, int nubmerOfGb) {
         this.numberOfMinutes = numberOfMinutes;
         this.numberOfSms = numberOfSms;
-        this.nubmerOfGb = nubmerOfGb;
+        this.numberOfGb = nubmerOfGb;
+    }
+
+    @Override
+    public String toString() {
+        return "Rate{" +
+                "numberOfMinutes=" + numberOfMinutes +
+                ", numberOfSms=" + numberOfSms +
+                ", numberOfGb=" + numberOfGb +
+                '}';
     }
 
     public int getNumberOfMinutes() {
@@ -20,6 +29,6 @@ public class Rate{
     }
 
     public int getNubmerOfGb() {
-        return nubmerOfGb;
+        return numberOfGb;
     }
 }

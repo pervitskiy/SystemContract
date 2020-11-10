@@ -1,5 +1,6 @@
 package repository;
 
+import customers.Person;
 import typeOfContracts.Contract;
 
 import java.util.Comparator;
@@ -13,4 +14,6 @@ public interface IRepository<Contract> {
      IRepository<typeOfContracts.Contract> findBy(Predicate<Contract> predicate);
      void sort(Comparator<Contract> comparator);
      Contract getContact(int i);
+     List<Person> getListPerson();
+     int size();
 }

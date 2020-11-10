@@ -53,4 +53,15 @@ public abstract class Contract {
     public Person getOwner() {
         return owner;
     }
+
+    @Override
+    public String toString() {
+        return "Contract{" +
+                "id=" + id +
+                ", numberContract=" + numberContract +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", owner=" + owner +
+                '}';
+    }
 }
