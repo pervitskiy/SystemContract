@@ -8,9 +8,9 @@ import java.util.function.Predicate;
 
 public interface IRepository<Contract> {
      void add(Contract item);
-     Contract getId(int id);
-     void remove(int id);
-     List<Contract> findBy(Predicate<Contract> predicate);
+     Contract getById(int id);
+     void removeById(int id);
+     IRepository<typeOfContracts.Contract> findBy(Predicate<Contract> predicate);
      void sort(Comparator<Contract> comparator);
-     Contract[] getContact();
+     Contract getContact(int i);
 }

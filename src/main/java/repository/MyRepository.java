@@ -1,5 +1,6 @@
 package repository;
 
+import sorter.BubbleSort;
 import sorter.ISorter;
 import sorter.QuickSort;
 import typeOfContracts.Contract;
@@ -24,6 +25,7 @@ public class MyRepository implements IRepository<Contract>{
     private int count_element;
     private final ISorter<Contract> sorter = new QuickSort<>();
 
+
     /**
      * Constructor - creating a new object
      */
@@ -31,8 +33,6 @@ public class MyRepository implements IRepository<Contract>{
         array_contract = new Contract[INIT_SIZE];
         count_element = 0;
     }
-
-
     /**
      * Method for adding a new contract.
      * @param item - contract,
@@ -50,7 +50,7 @@ public class MyRepository implements IRepository<Contract>{
      * @return Contact
      */
     @Override
-    public Contract getId(int id) {
+    public Contract getById(int id) {
         for (int i=0; i<size(); i++){
             if (array_contract[i].getId() == id)
                 return array_contract[i];
@@ -64,7 +64,7 @@ public class MyRepository implements IRepository<Contract>{
      * @param id - id Contract
      */
     @Override
-    public void remove(int id) {
+    public void removeById(int id) {
         for (int i=0; i<count_element; i++)
             if (array_contract[i].getId() == id) {
                 for (int j = i; j < count_element; j++)
@@ -86,13 +86,24 @@ public class MyRepository implements IRepository<Contract>{
         System.arraycopy(array_contract, 0, newArray, 0, count_element);
         array_contract = newArray;
     }
+
+    /**
+     *
+     * Sorting contracts according to a given criterion.
+     * @param comparator - comparator for contract comparison
+     */
     @Override
     public void sort(Comparator<Contract> comparator) {
         sorter.sort(array_contract, comparator, 0, size() - 1);
     }
 
-    public List<Contract> findBy(Predicate<Contract> predicate) {
-        List<Contract> result = new ArrayList<>();
+    /**
+     * Search for a contract by a given criterion
+     * @param predicate - search criteria
+     * @return new IRepository<Contract>
+     */
+    public IRepository<Contract> findBy(Predicate<Contract> predicate) {
+        IRepository<Contract> result = new MyRepository();
         for (int i=0; i<size(); i++){
             if (predicate.test(array_contract[i]))
                 result.add(array_contract[i]);
@@ -100,12 +111,20 @@ public class MyRepository implements IRepository<Contract>{
         return result;
     }
 
+    /**
+     * @return the number of elements in the array
+     */
     public int size() {
         return count_element;
     }
 
-    public Contract[] getContact(){
-        return this.array_contract;
+
+    /**
+     * @param i - array number
+     * @return Contract
+     */
+    public Contract getContact(int i){
+        return array_contract[i];
     }
 
 }

@@ -33,7 +33,6 @@ public class QuickSort<T> implements ISorter<T> {
             if (comparator.compare(arr[j],pivot) < 0)
             {
                 i++;
-
                 // swap arr[i] and arr[j]
                 T temp = arr[i];
                 arr[i] = arr[j];
