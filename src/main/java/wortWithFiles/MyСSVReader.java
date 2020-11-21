@@ -14,15 +14,23 @@ import java.io.*;
 import java.sql.SQLOutput;
 import java.time.LocalDate;
 
+/**
+ * A class that adds data from this file to your repository
+ */
 public class MyСSVReader {
-    private IRepository<Contract> repository;
-    private InputStreamReader fileReader;
 
-    public MyСSVReader(InputStreamReader file, IRepository<Contract> repository){
+    private IRepository<Contract> repository;
+    private FileReader fileReader;
+
+    public MyСSVReader(FileReader file, IRepository<Contract> repository){
         this.fileReader = file;
         this.repository = repository;
-
     }
+
+
+    /** Create contacts by file and add them to the repository
+     * @throws IOException
+     */
     public  void createContactByFile() throws IOException {
         CSVReader reader = new CSVReader(fileReader, ';' , '"' , 1);
         String[] nextLine;
@@ -31,6 +39,12 @@ public class MyСSVReader {
         }
     }
 
+    /**
+     * Parse a line and,
+     * depending on the type of contract,
+     * create a contract
+     * @param nextLine - Line with information about the Сontract
+     */
     private void passing(String[] nextLine) {
         String[] startDate = nextLine[2].split("-");
         String[] endDate = nextLine[3].split("-");
@@ -40,13 +54,17 @@ public class MyСSVReader {
         LocalDate end = LocalDate.of(Integer.parseInt(endDate[0].trim()), Integer.parseInt(endDate[1].trim()), Integer.parseInt(endDate[2].trim()));
         Person person = createNewPeron(nextLine);
         switch (nextLine[12].trim().toLowerCase()){
-            case "internetcontract": createInternetContract(nextLine, id, number, start, end, person);break;
-            case "tvcontract" : createTVContract(nextLine, id, number, start, end, person);break;
-            case  "mobilecontract" : createMobileContract(nextLine, id, number, start, end, person);break;
+            case "internetcontract": createInternetContract(nextLine[13], id, number, start, end, person);break;
+            case "tvcontract" : createTVContract(nextLine[13], id, number, start, end, person);break;
+            case  "mobilecontract" : createMobileContract(nextLine[13], id, number, start, end, person);break;
         }
 
     }
 
+    /**Create a new owner if it is not in the repository
+     * @param nextLine - Line with information about the Owner
+     * @return Person
+     */
     private Person createNewPeron(String[] nextLine) {
         int id  = Integer.parseInt(nextLine[4].trim());
         String first_name = nextLine[5].trim();
@@ -72,8 +90,16 @@ public class MyСSVReader {
         return person;
     }
 
-    private void createMobileContract(String[] nextLine, int id, int number, LocalDate startDate, LocalDate endDate, Person person) {
-        String[] rate = nextLine[13].split(",");
+    /**Creating A Mobile Contract and adding to the repository
+     * @param stringRate - Line with numbers Rate
+     * @param id - id Contract
+     * @param number - number Contract
+     * @param startDate -  start date of the contract
+     * @param endDate - end date of the contract
+     * @param person - owner Contract
+     */
+    private void createMobileContract(String stringRate, int id, int number, LocalDate startDate, LocalDate endDate, Person person) {
+        String[] rate = stringRate.split(",");
         int numberOfMinutes = Integer.parseInt(rate[0].trim());
         int numberOfSms = Integer.parseInt(rate[1].trim());
         int numberOfGb = Integer.parseInt(rate[2].trim());
@@ -81,20 +107,38 @@ public class MyСSVReader {
         this.repository.add(contract);
     }
 
-    private void createTVContract(String[] nextLine, int id, int number, LocalDate startDate, LocalDate endDate, Person person) {
-        TVContract.ChannelPacage channelPacage;
-        switch (nextLine[13].trim().toLowerCase()){
-            case "cinema": channelPacage = TVContract.ChannelPacage.CINEMA; break;
-            case "sport": channelPacage = TVContract.ChannelPacage.SPORT; break;
+    /**
+     * Creating A ТV Contract and adding to the repository
+     * @param channelPac - channel package
+     * @param id - id Contract
+     * @param number - number Contract
+     * @param startDate -  start date of the contract
+     * @param endDate - end date of the contract
+     * @param person - owner Contract
+     */
+    private void createTVContract(String channelPac, int id, int number, LocalDate startDate, LocalDate endDate, Person person) {
+        TVContract.ChannelPacage channelPackage;
+        switch (channelPac.trim().toLowerCase()){
+            case "cinema": channelPackage = TVContract.ChannelPacage.CINEMA; break;
+            case "sport": channelPackage = TVContract.ChannelPacage.SPORT; break;
             default:
-                channelPacage = TVContract.ChannelPacage.STANDARD; break;
+                channelPackage = TVContract.ChannelPacage.STANDARD; break;
         }
-        Contract contract = new TVContract(id, number, startDate, endDate, person, channelPacage);
+        Contract contract = new TVContract(id, number, startDate, endDate, person, channelPackage);
         this.repository.add(contract);
     }
 
-    private void createInternetContract(String[] nextLine, int id, int number, LocalDate startDate, LocalDate endDate, Person person) {
-        Contract contract = new InternetContract(id, number, startDate, endDate, person, Double.parseDouble(nextLine[13].trim()));
+    /**Creating A Internet Contract and adding to the repository
+     *
+     * @param internetSpeed - internet speed
+     * @param id - id Contract
+     * @param number - number Contract
+     * @param startDate - start date of the contract
+     * @param endDate - end date of the contract
+     * @param person - owner Contract
+     */
+    private void createInternetContract(String internetSpeed, int id, int number, LocalDate startDate, LocalDate endDate, Person person) {
+        Contract contract = new InternetContract(id, number, startDate, endDate, person, Double.parseDouble(internetSpeed.trim()));
         this.repository.add(contract);
     }
 }

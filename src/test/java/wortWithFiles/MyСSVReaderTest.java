@@ -10,6 +10,7 @@ import typeOfContracts.InternetContract;
 import typeOfContracts.TVContract;
 import wortWithFiles.MyСSVReader;
 
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -20,12 +21,11 @@ public class MyСSVReaderTest extends TestCase {
 
     public MyСSVReaderTest() throws IOException {
         repository_by_file = new MyRepository();
-        InputStream is = MyСSVReaderTest.class.getResourceAsStream("/data.csv");
-        MyСSVReader myСSVReader = new MyСSVReader(new InputStreamReader(is),repository_by_file);
+        MyСSVReader myСSVReader = new MyСSVReader(new FileReader("src/main/resources/data.csv"), repository_by_file);
         myСSVReader.createContactByFile();
     }
 
-    public void testCreateContactByFile() throws IOException {
+    public void testCreateContactByFile() {
         //check at the index contact
         Assert.assertEquals(repository_by_file.getContact(0).getId(), 1);
         Assert.assertEquals(repository_by_file.getContact(1).getId(), 2);
