@@ -15,6 +15,7 @@ public class Person {
     private int passportSeries;
     private int passportNumber;
 
+
     @Override
     public String toString() {
         return "Person{" +
@@ -28,6 +29,7 @@ public class Person {
                 ", passportNumber=" + passportNumber +
                 '}';
     }
+
 
     @Override
     public boolean equals(Object o) {

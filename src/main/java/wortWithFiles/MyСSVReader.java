@@ -11,30 +11,35 @@ import typeOfContracts.Rate.Rate;
 import typeOfContracts.TVContract;
 
 import java.io.*;
+import java.sql.SQLOutput;
 import java.time.LocalDate;
 
 public class MyСSVReader {
-    private IRepository<Contract> repository = new MyRepository();
+    private IRepository<Contract> repository;
+    private InputStreamReader fileReader;
 
-    public IRepository<Contract> createContactByFile(String file_name) throws IOException {
-        InputStream is = MyСSVReader.class.getResourceAsStream(file_name);
-        CSVReader reader = new CSVReader(new InputStreamReader(is), ';' , '"' , 1);
+    public MyСSVReader(InputStreamReader file, IRepository<Contract> repository){
+        this.fileReader = file;
+        this.repository = repository;
+
+    }
+    public  void createContactByFile() throws IOException {
+        CSVReader reader = new CSVReader(fileReader, ';' , '"' , 1);
         String[] nextLine;
         while ((nextLine = reader.readNext()) != null) {
             passing(nextLine);
         }
-        return repository;
     }
 
     private void passing(String[] nextLine) {
-        String[] startDate = nextLine[3].split("-");
-        String[] endDate = nextLine[4].split("-");
-        int id = Integer.parseInt(nextLine[1].trim());
-        int number = Integer.parseInt(nextLine[2].trim());
+        String[] startDate = nextLine[2].split("-");
+        String[] endDate = nextLine[3].split("-");
+        int id = Integer.parseInt(nextLine[0].trim());
+        int number = Integer.parseInt(nextLine[1].trim());
         LocalDate start = LocalDate.of(Integer.parseInt(startDate[0].trim()), Integer.parseInt(startDate[1].trim()), Integer.parseInt(startDate[2].trim()));
         LocalDate end = LocalDate.of(Integer.parseInt(endDate[0].trim()), Integer.parseInt(endDate[1].trim()), Integer.parseInt(endDate[2].trim()));
         Person person = createNewPeron(nextLine);
-        switch (nextLine[0].trim().toLowerCase()){
+        switch (nextLine[12].trim().toLowerCase()){
             case "internetcontract": createInternetContract(nextLine, id, number, start, end, person);break;
             case "tvcontract" : createTVContract(nextLine, id, number, start, end, person);break;
             case  "mobilecontract" : createMobileContract(nextLine, id, number, start, end, person);break;
@@ -43,19 +48,19 @@ public class MyСSVReader {
     }
 
     private Person createNewPeron(String[] nextLine) {
-        int id  = Integer.parseInt(nextLine[5].trim());
-        String first_name = nextLine[6].trim();
-        String last_name = nextLine[7].trim();
-        String middle_name = nextLine[8].trim();
-        String[] birt = nextLine[9].split("-");
+        int id  = Integer.parseInt(nextLine[4].trim());
+        String first_name = nextLine[5].trim();
+        String last_name = nextLine[6].trim();
+        String middle_name = nextLine[7].trim();
+        String[] birt = nextLine[8].split("-");
         LocalDate bithday = LocalDate.of(Integer.parseInt(birt[0].trim()), Integer.parseInt(birt[1].trim()), Integer.parseInt(birt[2].trim()));
         Person.Gender gender;
-        switch (nextLine[10].trim().toLowerCase()){
+        switch (nextLine[9].trim().toLowerCase()){
             case "woman" : gender = Person.Gender.WOMAN;break;
             default:       gender=Person.Gender.MALE;break;
         }
-        int passportSeries = Integer.parseInt(nextLine[11].trim());
-        int passportNumber = Integer.parseInt(nextLine[12].trim());
+        int passportSeries = Integer.parseInt(nextLine[10].trim());
+        int passportNumber = Integer.parseInt(nextLine[11].trim());
         Person person = new Person(id, first_name, last_name, middle_name, bithday, gender, passportSeries, passportNumber);
 
         for (Person person_from_repository :repository.getListPerson()){

@@ -1,4 +1,4 @@
-type_contract   ; id_contract; number; startDate ; endDate    ; id_person; first_name; last_name; middle_name; birthday  ; gender; passportSeries; passportNumber; addition
-InternetContract; 1          ; 1      ; 2020-01-20; 2022-01-01; 1        ; Dima      ; per      ; Ev         ; 2000-10-26; male  ; 2011          ; 400541        ; 100.1
-TVContract      ; 2          ; 2      ; 2017-11-10; 2023-01-01; 1        ; Dima      ; per      ; Ev         ; 2000-10-26; male  ; 2011          ; 400541        ; sport
-MobileContract  ; 3          ; 3      ; 2011-11-10; 2013-01-01; 2        ; Max       ; pefd     ; Ev         ; 2000-01-26; woman ; 2011          ; 400541        ; 12,4,2
+id_contract; number; startDate ; endDate    ; id_person; first_name; last_name; middle_name; birthday  ; gender; passportSeries; passportNumber; type_contract   ;addition
+1          ; 1      ; 2020-01-20; 2022-01-01; 1        ; Dima      ; per      ; Ev         ; 2000-10-26; male  ; 2011          ; 400541        ; InternetContract;100.1
+2          ; 2      ; 2017-11-10; 2023-01-01; 1        ; Dima      ; per      ; Ev         ; 2000-10-26; male  ; 2011          ; 400541        ; TVContract      ;sport
+3          ; 3      ; 2011-11-10; 2013-01-01; 2        ; Max       ; pefd     ; Ev         ; 2000-01-26; woman ; 2011          ; 400541        ; MobileContract  ;12,4,2
