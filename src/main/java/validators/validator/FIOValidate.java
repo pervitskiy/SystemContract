@@ -17,7 +17,7 @@ public class FIOValidate implements Validate<Contract> {
     private static final int MAX_LENGTH_FIRST_NAME = 100;
     private static final int MIN_LENGTH_LAST_NAME = 4;
     private static final int MAX_LENGTH_LAST_NAME = 50;
-    private static final int MIN_LENGTH_MIDDLE_NAME = 4;
+    private static final int MIN_LENGTH_MIDDLE_NAME = 5;
     private static final int MAX_LENGTH_MIDDLE_NAME = 60;
 
     /**

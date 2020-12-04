@@ -23,11 +23,13 @@ public class MyСSVReaderTest extends TestCase {
         Assert.assertEquals(repository_by_file.getContact(0).getId(), 1);
         Assert.assertEquals(repository_by_file.getContact(1).getId(), 2);
         Assert.assertEquals(repository_by_file.getContact(2).getId(), 3);
-
         //check at the index owner
         Assert.assertEquals(repository_by_file.getContact(0).getOwner().getId(), 1);
         Assert.assertEquals(repository_by_file.getContact(1).getOwner().getId(), 1);
         Assert.assertEquals(repository_by_file.getContact(2).getOwner().getId(), 2);
+    }
 
+    public void testSizeContract() {
+        Assert.assertEquals(repository_by_file.size(), 3);
     }
 }
