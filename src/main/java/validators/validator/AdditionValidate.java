@@ -10,6 +10,10 @@ import validators.ValidationStatus;
 
 import java.util.regex.Pattern;
 
+
+/**
+ * Class for validating an additional field for Contracts
+ */
 public class AdditionValidate implements Validate<Contract> {
 
     private static final int MIN_SMS = 0;
@@ -26,10 +30,13 @@ public class AdditionValidate implements Validate<Contract> {
     private static final int MAX_SPEED = 3000;
     private static final int MIN_RECOMMENDED_SPEED = 50;
 
-
+    /**
+     * @param contract - the contract for validate
+     * @return - Validation status message
+     */
     @Override
     public Message doValidate(Contract contract) {
-
+        //
         if (contract instanceof InternetContract) {
             return validateInternetContact((InternetContract)contract);
         }
@@ -41,6 +48,11 @@ public class AdditionValidate implements Validate<Contract> {
         }
         return new Message("something went wrong", ValidationStatus.ERROR);
     }
+
+    /**
+     * @param contract - the MobileContract for validate
+     * @return - Validation status message
+     */
 
     private Message validateMobileContract(MobileContract contract) {
         int sms = contract.getRate().getNumberOfSms();
@@ -58,24 +70,45 @@ public class AdditionValidate implements Validate<Contract> {
         return new Message(ValidationStatus.ОК);
     }
 
+    /**
+     * @param sms - number of SMS messages
+     * @return true - if it is not in the acceptable range
+     */
     private boolean checkTheRangeOfSmsValues(int sms) {
         return sms < MIN_SMS || sms > MAX_SMS;
     }
 
+
+    /**
+     * @param str - any line
+     * @return true - if the line contains invalid characters
+     */
     private boolean checkInvalidChar(int str) {
         Pattern pattern = Pattern.compile("[^0-9]");
         return pattern.matcher(String.valueOf(str)).find();
     }
 
+    /**
+     * @param megabytes  - number of megabytes in rate
+     * @return true - if it is not in the acceptable range
+     */
     private boolean checkTheRangeOfMegabytesValues(int megabytes) {
         return megabytes < MIN_MEGABYTES || megabytes > MAX_MEGABYTES;
 
     }
 
+    /**
+     * @param minutes - number of minutes in rate
+     * @return true - if it is not in the acceptable range
+     */
     private boolean checkTheRangeOfMinutesValues(int minutes) {
         return minutes < MIN_MINUTES || minutes > MAX_MINUTES;
     }
 
+    /**
+     * @param contract - the MobileContract for validate
+     * @return - Validation status message
+     */
     private Message validateInternetContact(InternetContract contract) {
         int internetSpeed = contract.getInternetSpeed();
         if (checkInvalidChar(internetSpeed)) {
@@ -89,10 +122,18 @@ public class AdditionValidate implements Validate<Contract> {
         return new Message(ValidationStatus.ОК);
     }
 
+    /**
+     * @param speed - internet speed
+     * @return true - if internet Speed is not in the acceptable range
+     */
     private boolean checkInternetSpeed(int speed) {
         return speed < MIN_SPEED || speed > MAX_SPEED;
     }
 
+    /**
+     * @param internetSpeed - internet speed
+     * @return true - if the internet speed is less than the recommended value
+     */
     private boolean checkInternetSpeedLessThenMinRecommendedSpeed(int internetSpeed) {
         return internetSpeed < MIN_RECOMMENDED_SPEED && internetSpeed > MIN_SPEED ;
     }

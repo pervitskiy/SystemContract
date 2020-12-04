@@ -29,6 +29,9 @@ public class MyСSVReader {
     private FileReader fileReader;
     private static List<Validate> validators = new ArrayList<>();
 
+    /**
+     * Adding the required validators
+     */
     static {
         validators.add(new AdditionValidate());
         validators.add(new DateContractValues());
@@ -44,6 +47,7 @@ public class MyСSVReader {
 
     /** Create contacts by file and add them to the repository
      * @throws IOException
+     * @throws ParseException - if a parsing program fails.
      */
     public  void createContactByFile() throws IOException, ParseException {
         CSVReader reader = new CSVReader(fileReader, ';' , '"' , 1);
@@ -63,6 +67,7 @@ public class MyСSVReader {
      * depending on the type of contract,
      * create a contract
      * @param nextLine - Line with information about the Сontract
+     * @throws ParseException - if a parsing program fails.
      */
     private Contract passing(String[] nextLine) throws ParseException {
         try {
@@ -94,6 +99,7 @@ public class MyСSVReader {
     /**Create a new owner if it is not in the repository
      * @param nextLine - Line with information about the Owner
      * @return Person
+     * @throws ParseException - if a parsing program fails.
      */
     private Person createNewPeron(String[] nextLine) throws ParseException {
         try {
@@ -141,6 +147,7 @@ public class MyСSVReader {
      * @param startDate -  start date of the contract
      * @param endDate - end date of the contract
      * @param person - owner Contract
+     * @throws ParseException - if a parsing program fails.
      */
     private Contract createMobileContract(String stringRate, int id, int number, LocalDate startDate, LocalDate endDate, Person person) throws ParseException {
         try {
@@ -163,6 +170,7 @@ public class MyСSVReader {
      * @param startDate -  start date of the contract
      * @param endDate - end date of the contract
      * @param person - owner Contract
+     * @throws ParseException - if a parsing program fails.
      */
     private Contract createTVContract(String channelPac, int id, int number, LocalDate startDate, LocalDate endDate, Person person) throws ParseException {
         try {
@@ -198,6 +206,7 @@ public class MyСSVReader {
      * @param startDate - start date of the contract
      * @param endDate - end date of the contract
      * @param person - owner Contract
+     * @throws ParseException - if a parsing program fails.
      */
     private Contract createInternetContract(String internetSpeed, int id, int number, LocalDate startDate, LocalDate endDate, Person person) throws ParseException {
         try {
@@ -208,10 +217,14 @@ public class MyСSVReader {
         }
     }
 
+    /**
+     * @param contract - Contract for validation check
+     * @return true - if all messages with status @ValidationStatus.ERROR or  @ValidationStatus.WARNING
+     */
     private boolean doValidation(Contract contract){
         List<Message> messages = validators.stream().map(validate -> validate.doValidate(contract)).collect(Collectors.toList());
         for(Message message : messages){
-            if (message.getStatus() == ValidationStatus.ERROR)
+            if (message.getStatus() == ValidationStatus.ERROR || message.getStatus() == ValidationStatus.WARNING)
                 return false;
         }
         return true;

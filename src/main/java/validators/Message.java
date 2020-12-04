@@ -1,7 +1,15 @@
 package validators;
 
 public class Message {
+
+    /**
+     * Error Message
+     */
     private String message;
+
+    /**
+     * Validation response statuses
+     */
     private ValidationStatus status;
 
     public String getMessage() {
