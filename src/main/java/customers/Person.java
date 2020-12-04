@@ -15,6 +15,9 @@ public class Person {
     private int passportSeries;
     private int passportNumber;
 
+    public void setId(int id) {
+        this.id = id;
+    }
 
     @Override
     public String toString() {
@@ -29,7 +32,6 @@ public class Person {
                 ", passportNumber=" + passportNumber +
                 '}';
     }
-
 
     @Override
     public boolean equals(Object o) {

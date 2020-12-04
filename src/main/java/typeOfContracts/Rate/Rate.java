@@ -5,10 +5,10 @@ public class Rate{
     private int numberOfSms;
     private int numberOfGb;
 
-    public Rate(int numberOfMinutes, int numberOfSms, int nubmerOfGb) {
+    public Rate(int numberOfMinutes, int numberOfSms, int numberOfGb) {
         this.numberOfMinutes = numberOfMinutes;
         this.numberOfSms = numberOfSms;
-        this.numberOfGb = nubmerOfGb;
+        this.numberOfGb = numberOfGb;
     }
 
     @Override
@@ -28,7 +28,7 @@ public class Rate{
         return numberOfSms;
     }
 
-    public int getNubmerOfGb() {
+    public int getNumberOfGb() {
         return numberOfGb;
     }
 }

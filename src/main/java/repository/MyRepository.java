@@ -8,6 +8,7 @@ import typeOfContracts.Contract;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -128,13 +129,13 @@ public class MyRepository implements IRepository<Contract>{
         return array_contract[i];
     }
 
-    public List<Person> getListPerson(){
+    @Override
+    public ArrayList<Person> getListSetPerson() {
         List<Person> list = new ArrayList<>();
-
         for (int i=0; i<size(); i++){
             list.add(array_contract[i].getOwner());
         }
-        return list;
+        return new ArrayList<Person>(new HashSet<Person>(list));
     }
 
     @Override

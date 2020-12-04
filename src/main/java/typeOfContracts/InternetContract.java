@@ -8,16 +8,18 @@ public class InternetContract extends Contract {
     /**
      * internet speed in mb/s
      */
-    private double internetSpeed;
+    private int internetSpeed;
 
-    public InternetContract(int id, int numberContract, LocalDate startDate, LocalDate endDate, Person owner, double internetSpeed) {
+    public InternetContract(int id, int numberContract, LocalDate startDate, LocalDate endDate, Person owner, int internetSpeed) {
         super(id, numberContract, startDate, endDate, owner);
         this.internetSpeed = internetSpeed;
     }
 
-    public double getInternetSpeed() {
+    public int getInternetSpeed() {
         return internetSpeed;
     }
+
+
     @Override
     public String toString() {
         return "InternetContract{" +

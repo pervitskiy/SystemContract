@@ -9,9 +9,9 @@ public class TVContract extends Contract {
     /**
      * String array of channel names
      */
-    private ChannelPacage channelPacage;
+    private ChannelPackage channelPackage;
 
-    public enum ChannelPacage{
+    public enum ChannelPackage {
         SPORT,
         STANDARD,
         CINEMA
@@ -25,16 +25,16 @@ public class TVContract extends Contract {
                 ", startDate=" + super.getStartDate() +
                 ", endDate=" + super.getEndDate() +
                 ", owner=" + super.getOwner() +
-                ", channelPacage=" + channelPacage +
+                ", channelPackage=" + channelPackage +
                 '}';
     }
 
-    public TVContract(int id, int numberContract, LocalDate startDate, LocalDate endDate, Person owner, ChannelPacage channelPacage) {
+    public TVContract(int id, int numberContract, LocalDate startDate, LocalDate endDate, Person owner, ChannelPackage channelPackage) {
         super(id, numberContract, startDate, endDate, owner);
-        this.channelPacage = channelPacage;
+        this.channelPackage = channelPackage;
     }
 
-    public ChannelPacage getChannelPacage() {
-        return channelPacage;
+    public ChannelPackage getChannelPackage() {
+        return channelPackage;
     }
 }

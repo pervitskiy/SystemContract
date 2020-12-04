@@ -1,25 +1,18 @@
 package wortWithFiles;
 
-import customers.Person;
 import junit.framework.TestCase;
 import org.junit.Assert;
 import repository.IRepository;
 import repository.MyRepository;
 import typeOfContracts.Contract;
-import typeOfContracts.InternetContract;
-import typeOfContracts.TVContract;
-import wortWithFiles.MyСSVReader;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.time.LocalDate;
 
 public class MyСSVReaderTest extends TestCase {
     IRepository<Contract> repository_by_file;
 
-    public MyСSVReaderTest() throws IOException {
+    public MyСSVReaderTest() throws IOException, ParseException {
         repository_by_file = new MyRepository();
         MyСSVReader myСSVReader = new MyСSVReader(new FileReader("src/main/resources/data.csv"), repository_by_file);
         myСSVReader.createContactByFile();
