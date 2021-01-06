@@ -1,5 +1,6 @@
 package repository;
 
+import annotations.MyInject;
 import customers.Person;
 import sorter.BubbleSort;
 import sorter.ISorter;
@@ -25,7 +26,9 @@ public class MyRepository implements IRepository<Contract>{
     private final int CUT_RATE = 5;
     private Contract[] array_contract;
     private int count_element;
-    private final ISorter<Contract> sorter = new QuickSort<>();
+
+   // @MyInject(clazz = ISorter.class)
+    private ISorter<Contract> sorter = new BubbleSort<>();
 
 
     /**
