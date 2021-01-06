@@ -1,5 +1,6 @@
 package wortWithFiles;
 
+import annotations.MyInject;
 import au.com.bytecode.opencsv.CSVReader;
 import customers.Person;
 import repository.IRepository;
@@ -26,18 +27,10 @@ public class MyСSVReader {
 
     private IRepository<Contract> repository;
     private FileReader fileReader;
-    private static List<Validate> validators = new ArrayList<>();
 
-    /**
-     * Adding the required validators
-     */
-    static {
-        validators.add(new AdditionValidate());
-        validators.add(new DateContractValidate());
-        validators.add(new AgeOwnerValidate());
-        validators.add(new FIOValidate());
-        validators.add(new PassportValidate());
-    }
+    @MyInject(clazz = Validate.class)
+    private List<Validate> validators;
+
 
     public MyСSVReader(FileReader file, IRepository<Contract> repository){
         this.fileReader = file;

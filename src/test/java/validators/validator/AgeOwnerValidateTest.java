@@ -14,7 +14,7 @@ import java.time.LocalDate;
 
 public class AgeOwnerValidateTest extends TestCase {
     Person person1 = new Person(1, "Dima", "Per", "EB", LocalDate.of(2000, 10, 26), Person.Gender.MALE, 2014, 800457);
-    Person person2 = new Person(2, "Max", "Lisdf", "HJewrwer", LocalDate.of(2003, 5, 26), Person.Gender.MALE, 2014, 800123);
+    Person person2 = new Person(2, "Max", "Lisdf", "HJewrwer", LocalDate.of(2004, 5, 26), Person.Gender.MALE, 2014, 800123);
     Person person3 = new Person(3, "Danil", "Petrov", "putins", LocalDate.of(2010, 11, 13), Person.Gender.MALE, 2014, 803148);
 
     Contract contract1 = new InternetContract(1,1, LocalDate.of(2009, 10, 12),LocalDate.of(2012, 12, 01), person1, 100);
@@ -27,7 +27,7 @@ public class AgeOwnerValidateTest extends TestCase {
 
     public void testDoValidate() {
         Assert.assertEquals(ageOwnerValidate.doValidate(contract1).getStatus(), ValidationStatus.ОК);
-        Assert.assertEquals(ageOwnerValidate.doValidate(contract1).getStatus(), ValidationStatus.WARNING);
+        Assert.assertEquals(ageOwnerValidate.doValidate(contract3).getStatus(), ValidationStatus.ОК);
         Assert.assertEquals(ageOwnerValidate.doValidate(contract5).getStatus(), ValidationStatus.ERROR);
 
     }

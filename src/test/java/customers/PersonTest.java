@@ -18,8 +18,8 @@ public class PersonTest extends TestCase {
         int age3 = person3.getAge();
 
         int realAge1 = 20;
-        int realAge2 = 17;
-        int realAge3 = 19;
+        int realAge2 = 18;
+        int realAge3 = 20;
         Assert.assertEquals(age1, realAge1);
         Assert.assertEquals(age2, realAge2);
         Assert.assertEquals(age3, realAge3);

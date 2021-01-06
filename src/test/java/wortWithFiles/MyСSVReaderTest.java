@@ -1,5 +1,6 @@
 package wortWithFiles;
 
+import annotations.Injector;
 import junit.framework.TestCase;
 import org.junit.Assert;
 import repository.IRepository;
@@ -12,9 +13,10 @@ import java.io.IOException;
 public class MyСSVReaderTest extends TestCase {
     IRepository<Contract> repository_by_file;
 
-    public MyСSVReaderTest() throws IOException, ParseException {
+    public MyСSVReaderTest() throws IOException, ParseException, InstantiationException, IllegalAccessException {
         repository_by_file = new MyRepository();
         MyСSVReader myСSVReader = new MyСSVReader(new FileReader("src/main/resources/data.csv"), repository_by_file);
+        Injector.inject(myСSVReader);
         myСSVReader.createContactByFile();
     }
 
