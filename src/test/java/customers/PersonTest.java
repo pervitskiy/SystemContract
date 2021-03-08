@@ -23,5 +23,6 @@ public class PersonTest extends TestCase {
         Assert.assertEquals(age1, realAge1);
         Assert.assertEquals(age2, realAge2);
         Assert.assertEquals(age3, realAge3);
+        System.out.println(person1.hashCode());
     }
 }

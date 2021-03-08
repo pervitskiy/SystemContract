@@ -1,5 +1,6 @@
 package annotations;
 
+import exception.MyInjectException;
 import junit.framework.TestCase;
 import org.junit.jupiter.api.Test;
 import repository.IRepository;
@@ -17,7 +18,7 @@ public class InjectorTest extends TestCase {
 
     IRepository<Contract> repository_by_file;
 
-    public void testInject() throws IllegalAccessException, IOException, InstantiationException, ParseException {
+    public void testInject() throws IOException, ParseException, MyInjectException {
         repository_by_file = new MyRepository();
         MyСSVReader myСSVReader = new MyСSVReader(new FileReader("src/main/resources/data.csv"), repository_by_file);
         Injector.inject(myСSVReader);

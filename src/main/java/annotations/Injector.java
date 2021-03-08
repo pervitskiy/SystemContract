@@ -1,6 +1,8 @@
 package annotations;
 
 import com.google.common.reflect.ClassPath;
+import exception.MyInjectException;
+import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -12,16 +14,19 @@ import java.util.Set;
 
 @AutoInjectable(packages = {"customers", "annotations", "repository", "sorter", "typeOfContracts", "validators", "wortWithFiles"})
 public class Injector {
+    private static final Logger LOGGER = Logger.getRootLogger();
+
     /**
      * Injects dependencies into the fields of the passed object.
      *
      * @param o object in the fields of which you want to inject the dependency
      */
-    public static <T> void inject(T o) throws IllegalAccessException, InstantiationException, IOException {
+    public static <T> void inject(T o) throws MyInjectException {
 
 
-        //получаем все пакеты
-        String[] packages = Injector.class.getAnnotation(AutoInjectable.class).packages();
+        try {
+            //получаем все пакеты
+            String[] packages = Injector.class.getAnnotation(AutoInjectable.class).packages();
             //проходимся по всем полям переданного класса
             for (Field field : o.getClass().getDeclaredFields()) {
                 //находим поля, помеченные аннотацией
@@ -46,7 +51,7 @@ public class Injector {
                     } else {
                         if (list.size() != 1) {
                             try {
-                                throw new Exception("Not found or found more than 1 class that can be injected into the field " + field.toString());
+                                throw new MyInjectException("Not found or found more than 1 class that can be injected into the field " + field.toString());
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -58,5 +63,9 @@ public class Injector {
                     break;
                 }
             }
+        } catch (IllegalAccessException | IOException | InstantiationException e) {
+            LOGGER.error(e.getMessage());
+            throw new MyInjectException(e);
+        }
     }
 }
