@@ -13,11 +13,10 @@ public class Rate{
 
     @Override
     public String toString() {
-        return "Rate{" +
-                "numberOfMinutes=" + numberOfMinutes +
-                ", numberOfSms=" + numberOfSms +
-                ", numberOfGb=" + numberOfGb +
-                '}';
+        return
+                numberOfMinutes +
+                "," + numberOfSms +
+                "," + numberOfGb;
     }
 
     public int getNumberOfMinutes() {
