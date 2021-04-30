@@ -13,9 +13,19 @@ import java.time.LocalDate;
 
 import static java.sql.Types.NULL;
 
+/**
+ * Class contains the logic for saving and restore contracts in xml format
+ */
 public class ContractAdapter extends XmlAdapter<ContractAdapter.ContractXML, Contract> {
 
 
+    /**
+     * Convert a value type
+     *
+     * @param v the value to be converted
+     * @return Contract
+     * @throws Exception -if error during the conversion
+     */
     @Override
     public Contract unmarshal(ContractXML v) throws Exception {
         if (v == null)
@@ -28,6 +38,11 @@ public class ContractAdapter extends XmlAdapter<ContractAdapter.ContractXML, Con
         else return new MobileContract(v.id, v.id, v.startDate, v.endDate, v.owner, v.rate);
     }
 
+    /** Convert a value type
+     *
+     * @param v  the value to be converted
+     * @throws Exception -if error during the conversion
+     */
     @Override
     public ContractXML marshal(Contract v) throws Exception {
         if (v == null)
@@ -50,6 +65,9 @@ public class ContractAdapter extends XmlAdapter<ContractAdapter.ContractXML, Con
         return contractXML;
     }
 
+    /**
+     * Class that contains all fields from all contracts
+     */
     static class ContractXML {
         @XmlElement(name = "id")
         private int id;

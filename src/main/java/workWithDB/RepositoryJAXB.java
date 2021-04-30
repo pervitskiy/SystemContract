@@ -9,8 +9,14 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
 
+/**
+ * Class for converting a repository to xml and vice versa
+ */
 public class RepositoryJAXB implements WorkWithDatabase {
 
+    /**
+     * The path to the file where the repository is saved in xml format
+     */
     private static final String PATH_TO_XML_FILE = "repository.xml";
     private final JAXBContext jc;
 
@@ -19,6 +25,11 @@ public class RepositoryJAXB implements WorkWithDatabase {
         this.jc = JAXBContext.newInstance(MyRepository.class);
     }
 
+    /**
+     * Saves the repository in xml format
+     *
+     * @param repository repository to save
+     */
     @Override
     public void save(IRepository repository) {
         try {
@@ -31,6 +42,11 @@ public class RepositoryJAXB implements WorkWithDatabase {
         }
     }
 
+    /**
+     * Restores repository from xml format
+     *
+     * @return restored repository
+     */
     @Override
     public IRepository dump() {
         try {
