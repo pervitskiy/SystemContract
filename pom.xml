@@ -60,8 +60,7 @@
                 <artifactId>flyway-maven-plugin</artifactId>
                 <version>4.0.3</version>
                 <configuration>
-                    <user>root</user>
-                    <password>root1234</password>
+<!--                    <user>root</user>-->
                     <url>
                         jdbc:postgresql://localhost:5432/systemcontract
                     </url>

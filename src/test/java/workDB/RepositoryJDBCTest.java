@@ -37,5 +37,7 @@ public class RepositoryJDBCTest extends TestCase {
     public void testSave(){
         RepositoryJDBC repositoryJDBC = RepositoryJDBC.getRepositoryJDBC();
         repositoryJDBC.save(this.repository);
+        IRepository restoreRepository = RepositoryJDBC.getRepositoryJDBC().dump();
+        assertEquals(repository.size(), restoreRepository.size());
     }
 }

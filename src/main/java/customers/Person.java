@@ -2,6 +2,7 @@ package customers;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class Person {
@@ -14,6 +15,9 @@ public class Person {
     private Gender gender;
     private int passportSeries;
     private int passportNumber;
+
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
 
     public void setId(int id) {
         this.id = id;
@@ -56,6 +60,17 @@ public class Person {
     public enum Gender {
         MALE,
         WOMAN
+    }
+
+    public Person(int id, String first_name, String last_name, String middle_name, String birthday, Gender gender, int passportSeries, int passportNumber) {
+        this.id = id;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.middle_name = middle_name;
+        this.birthday = LocalDate.parse(birthday, formatter);;
+        this.gender = gender;
+        this.passportSeries = passportSeries;
+        this.passportNumber = passportNumber;
     }
 
     public Person(int id, String first_name, String last_name, String middle_name, LocalDate birthday, Gender gender, int passportSeries, int passportNumber) {
