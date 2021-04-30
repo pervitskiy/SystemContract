@@ -7,6 +7,7 @@ import sorter.ISorter;
 import sorter.QuickSort;
 import typeOfContracts.Contract;
 
+import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
@@ -17,17 +18,28 @@ import java.util.function.Predicate;
  * Class MyRepository, that can add or delete Contract, get a contract by ID
  * @author Pervitskiy_d_e
  */
+@XmlRootElement(name = "myrepository")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class MyRepository implements IRepository<Contract>{
 
     /**
      * variable for initializing the array
      */
+    @XmlElement(name = "init_sizw")
     private final int INIT_SIZE = 20;
+    @XmlElement(name = "cur_rate")
     private final int CUT_RATE = 5;
+    @XmlElementWrapper(name = "contracts")
+    @XmlElement(name = "contract")
     private Contract[] array_contract;
+    @XmlElement
     private int count_element;
 
-   // @MyInject(clazz = ISorter.class)
+    @MyInject(clazz = ISorter.class)
+    @XmlElements({
+            @XmlElement(type = BubbleSort.class),
+            @XmlElement(type = QuickSort.class)
+    })
     private ISorter<Contract> sorter = new BubbleSort<>();
 
 

@@ -1,9 +1,12 @@
 package typeOfContracts;
 
 import customers.Person;
+import workWithDB.ContractAdapter;
 
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDate;
 
+@XmlJavaTypeAdapter(ContractAdapter.class)
 public abstract class Contract {
     /**
      * id - id Contract

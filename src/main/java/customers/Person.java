@@ -1,21 +1,35 @@
 package customers;
 
+import workWithDB.ConverterTypeDate;
+
+import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
+@XmlRootElement(name = "person")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Person {
+    @XmlElement
     private int id;
+    @XmlElement
     private String first_name;
+    @XmlElement
     private String last_name;
-
+    @XmlElement
     private String middle_name;
+    @XmlJavaTypeAdapter(ConverterTypeDate.class)
     private LocalDate birthday;
+    @XmlElement
     private Gender gender;
+    @XmlElement
     private int passportSeries;
+    @XmlElement
     private int passportNumber;
-
+    //don't save
+    @XmlTransient
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
 
