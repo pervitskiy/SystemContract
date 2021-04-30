@@ -23,9 +23,21 @@ import static java.sql.Types.NULL;
 
 public class RepositoryJDBC implements WorkWithDatabase{
 
+    /**
+     *  Sql query to insert a person to the database
+     */
     private static final String INSERT_PERSON = "INSERT INTO PERSON (person_id,first_name,last_name,middle_name,birthday,gender,passport_series,passport_number) VALUES (?,?,?,?,?,?,?,?) ON CONFLICT(person_id) DO UPDATE SET first_name=excluded.first_name";
+    /**
+     *  Sql query to insert a rate to the database
+     */
     private static final String INSERT_RATE = "INSERT INTO RATE (id_rate,numberOfMinutes,numberOfSms,numberOfGb) VALUES (?,?,?,?) ON CONFLICT(id_rate) DO UPDATE SET numberOfMinutes=excluded.numberOfMinutes";
+    /**
+     *  Sql query to insert a contract to the database
+     */
     private static final String INSERT_CONTRACT = "INSERT INTO CONTRACT (id_contract,start_date,end_date,max_speed,package_channel,rate,owner_id) VALUES (?,?,?,?,?,?,?) ON CONFLICT(id_contract) DO UPDATE SET start_date=excluded.start_date";
+    /**
+     *  Sql query to select a contract with person and rate to the database
+     */
     private static final String SELECT_CONTRACT = "SELECT * FROM CONTRACT join Person ON owner_id = person_id left join Rate  on rate = id_rate";
 
 
@@ -39,7 +51,9 @@ public class RepositoryJDBC implements WorkWithDatabase{
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
 
-
+    /**
+     *  It loads properties for connecting to the database.
+     */
     private RepositoryJDBC(){
         try {
             InputStream dbp = RepositoryJDBC.class.getClassLoader().getResourceAsStream("DBConnection.properties");
@@ -62,6 +76,11 @@ public class RepositoryJDBC implements WorkWithDatabase{
         return repositoryJDBC;
     }
 
+    /**
+     * Saves the repository to the database
+     *
+     * @param repository
+     */
     @Override
     public void save(IRepository repository) {
         try {
@@ -114,6 +133,11 @@ public class RepositoryJDBC implements WorkWithDatabase{
         }
     }
 
+    /**
+     * restore the repository to the database
+     *
+     * @return Repository
+     */
     @Override
     public IRepository dump() {
         IRepository repository = new MyRepository();
